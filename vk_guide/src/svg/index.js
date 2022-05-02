@@ -1,0 +1,34 @@
+import {ReactComponent as History} from './history.svg';
+import {ReactComponent as Settings} from './settings.svg';
+import {ReactComponent as Groups} from './groups.svg';
+import {ReactComponent as Calls} from './calls.svg';
+import {ReactComponent as Classifieds} from './classifieds.svg';
+import {ReactComponent as Clips} from './clips.svg';
+import {ReactComponent as Dating} from './dating.svg';
+import {ReactComponent as Friends} from './friends.svg';
+import {ReactComponent as Messenger} from './messenger.svg';
+import {ReactComponent as Music} from './music.svg';
+import {ReactComponent as Pay} from './pay.svg';
+import {ReactComponent as Podcasts} from './podcasts.svg';
+import {ReactComponent as Profile} from './profile.svg';
+import {ReactComponent as Services} from './services.svg';
+import {ReactComponent as Tapes} from './tapes.svg';
+import {ReactComponent as Video} from './video.svg';
+
+
+export const SVGHistory = History;
+export const SVGSettings = Settings;
+export const SVGGroups = Groups;
+export const SVGCalls = Calls;
+export const SVGClassifieds = Classifieds;
+export const SVGClips = Clips;
+export const SVGDating = Dating;
+export const SVGFriends = Friends;
+export const SVGMessenger = Messenger;
+export const SVGMusic = Music;
+export const SVGPay = Pay;
+export const SVGPodcasts = Podcasts;
+export const SVGProfile = Profile;
+export const SVGServices = Services;
+export const SVGTapes = Tapes;
+export const SVGVideo = Video;

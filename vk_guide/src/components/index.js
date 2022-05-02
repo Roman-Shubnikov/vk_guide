@@ -1,0 +1,1 @@
+export { EpicItemPC } from './EpicItem';

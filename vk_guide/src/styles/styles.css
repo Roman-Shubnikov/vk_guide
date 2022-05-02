@@ -1,0 +1,23 @@
+@import './fonts/fonts.css';
+
+
+.vkuiSplitCol--spaced {
+    margin-left: 0px;
+}
+.vkuiPlaceholder__header {
+    font-family: VK Bold, system-ui, Helvetica Neue, Roboto, sans-serif;;
+}
+.svg-group .vkuiGroup__inner,
+.svg-group .vkuiCard__in {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+.place-left .vkuiPlaceholder__in {
+    text-align: left;
+    padding-bottom: 10px;
+    padding-top: 20px;
+}

@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'VK Bold';
+    src: url('./vkBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
     Panel, 
     PanelHeader, 
@@ -8,13 +7,17 @@ import {
     SimpleCell,
     Div,
     Card,
+    MiniInfoCell,
 } from '@vkontakte/vkui';
-import { Icon56LogoVk } from '@vkontakte/icons';
+import { Icon20PinOutline } from '@vkontakte/icons';
+
+import { SVGLogo } from '../../../svg';
 import { CATEGORIES } from '../../../config';
 import { useNavigation } from '../../../hooks';
 
 export const Main = props => {
     const { goPanel, activeStory } = useNavigation();
+
     return (
         <Panel id={props.id}>
             <PanelHeader>
@@ -22,10 +25,21 @@ export const Main = props => {
             </PanelHeader>
             <Group>
                 <Placeholder header='Узнайте о ВКонтакте больше'
-                icon={<Icon56LogoVk style={{color: '#0077FF'}} />}>
+                className='vk-sans placeholder-mini'
+                icon={<SVGLogo />}>
                     Впервые ВКонтакте, давно не заходили или просто не следили за обновлениями? 
                     Сейчас мы расскажем обо всем. Выбирайте интересующую категорию
+                    <Card style={{marginTop: 30, textAlign: 'left'}}>
+                        <MiniInfoCell
+                        before={<Icon20PinOutline />}
+                        textWrap='full'>
+                            Данный сервис не является официальным продуктом ВКонтакте. Друзья, не дайте себя обмануть!
+                        </MiniInfoCell>
+                    </Card>
                 </Placeholder>
+                <Div>
+                    
+                </Div>
             </Group>
             <Group>
                 <Div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
@@ -36,9 +50,10 @@ export const Main = props => {
                         margin: 0,
                         width: '100%'}}>
                         {CATEGORIES.map((category) => (
-                            <li style={{marginBottom: 15}}>
+                            <li key={category.name} style={{marginBottom: 15}}>
                             <Card onClick={() => {props.setChapter(category.category);goPanel(activeStory, 'chapter', true)}}>
                                 <SimpleCell
+                                style={{borderRadius: 8}}
                                 before={category.icon}
                                 >
                                     {category.name}

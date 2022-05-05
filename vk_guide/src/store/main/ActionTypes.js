@@ -8,7 +8,9 @@ export const viewsActionTypes = {
     SET_SNACKBAR: 'VIEWS.SET_SNACKBAR',
     SET_POPOUT: 'VIEWS.SET_POPOUT',
     SET_GLOBAL_ERROR: 'VIEWS.SET_GLOBAL_ERROR',
+
 }
 export const accountActionTypes = {
     SET_SCHEME: 'ACCOUNT.SET_SCHEME',
+    SET_USER_TOKEN: 'ACCOUNT.SET_USER_TOKEN',
 }

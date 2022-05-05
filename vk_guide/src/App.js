@@ -28,12 +28,12 @@ import {
 } from '@vkontakte/icons';
 import '@vkontakte/vkui/dist/vkui.css';
 import './styles/styles.css';
-import { useNavigation } from './hooks';
-import { IS_MOBILE, viewsStructure } from './config';
+import { useNavigation, useUser } from './hooks';
+import { APP_ID, IS_MOBILE, viewsStructure } from './config';
 import { useSelector, useDispatch } from 'react-redux';
 import { accountActions, viewsActions } from './store/main';
 import { EpicItemPC } from './components';
-import { Excursions } from './panels/Excursions';
+import { Excursions, Communites, Services } from './panels';
 
 var DESKTOP_SIZE = 1000;
 var TABLET_SIZE = 900;
@@ -78,6 +78,7 @@ const scheme_params = {
 var backTimeout = false;
 const App = () => {
 	const dispatch = useDispatch();
+	const { setUserToken } = useUser();
 	const { schemeSettings } = useSelector((state) => state.account);
 	const { scheme, default_scheme } = schemeSettings;
 	const {
@@ -85,6 +86,7 @@ const App = () => {
 		historyPanels, 
 		goPanel,
 		popout,
+		goDisconnect,
 		setPopout } = useNavigation();
 	const need_epic = useSelector((state) => state.views.need_epic)
 	const setScheme = useCallback((payload) => dispatch(accountActions.setScheme(payload)), [dispatch])
@@ -97,6 +99,14 @@ const App = () => {
 		}
 	  }
 	const AppInit = useCallback(() => {
+		bridge.send("VKWebAppGetAuthToken", {
+			app_id: APP_ID,
+			scope: '',
+		})
+		.then((data) => {
+			setUserToken(data.access_token)
+		})
+		.catch(goDisconnect)
 		if( activeStory === 'disconnect') {
 		  let {view, panel} = historyPanels[historyPanels.length - 2];
 		  goPanel(view, panel, true, true)
@@ -109,24 +119,27 @@ const App = () => {
 		if (history.length <= 1) {
 			bridge.send("VKWebAppClose", {"status": "success"});
 		} else {
-		if(history[history.length] >= 2) {
-			bridge.send('VKWebAppDisableSwipeBack');
-		}
-		setHash('');
-		history.pop()
-		let {view, panel} = history[history.length - 1];
-		setActiveScene(view, panel)
-		setPopout(<ScreenSpinner />)
-		setTimeout(() => {
-			setPopout(null)
-			}, 500)
-		}
-		setHistoryPanels(history)
-		setTimeout(() => {backTimeout = false;}, 500)
-		
+			if(history.length >= 2) {
+				bridge.send('VKWebAppDisableSwipeBack');
+			}else {
+				bridge.send('VKWebAppEnableSwipeBack');
+			}
+			setHash('');
+			history.pop()
+			let {view, panel} = history[history.length - 1];
+			setActiveScene(view, panel)
+			setPopout(<ScreenSpinner />)
+			setTimeout(() => {
+				setPopout(null)
+				}, 500)
+			}
+			setHistoryPanels(history)
+			setTimeout(() => {backTimeout = false;}, 500)
+			
 	}else{
 		window.history.pushState({ ...history[history.length - 1] }, history[history.length - 1].panel );
 	}
+	// eslint-disable-next-line
 	}, [historyPanels, setHistoryPanels, setActiveScene])
 	const handlePopstate = useCallback((e) => {
 		e.preventDefault();
@@ -172,7 +185,7 @@ const App = () => {
 	}, [default_scheme, setScheme])
 	
 	const onEpicTap = (e) => {
-		setActiveScene(e.currentTarget.dataset.story, e.currentTarget.dataset.story);
+		goPanel(e.currentTarget.dataset.story, viewsStructure[e.currentTarget.dataset.story].panels.homepanel);
 	}
 	const platformwithPlat = usePlatform();
 	const platform = useRef();
@@ -193,9 +206,11 @@ const App = () => {
     hasHeader.current = platform.current !== VKCOM;
     isDesktop.current = viewWidth >= ViewWidth.SMALL_TABLET;
   }, [viewWidth, platform])
-
+  
   	const Views = [
 		<Excursions id={viewsStructure.Excursions.navName} key={'1'} />,
+		<Communites id={viewsStructure.Communites.navName} key={'2'} />,
+		<Services id={viewsStructure.Services.navName} key={'3'} />,
 	  ]
 	return (
 		<ConfigProvider scheme={scheme} platform={platform.current}>
@@ -205,8 +220,8 @@ const App = () => {
 				<SplitCol
 				animate={!isDesktop.current}
                 spaced={isDesktop.current}
-                width={isDesktop.current ? '704px' : '100%'}
-                maxWidth={isDesktop.current ? '704px' : '100%'}>
+                width={isDesktop.current ? '690px' : '100%'}
+                maxWidth={isDesktop.current ? '690px' : '100%'}>
 					<Epic activeStory={activeStory}
 						tabbar={!isDesktop.current && need_epic && 
 							<Tabbar>

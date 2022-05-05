@@ -4,7 +4,7 @@
 .vkuiSplitCol--spaced {
     margin-left: 0px;
 }
-.vkuiPlaceholder__header {
+.vk-sans .vkuiPlaceholder__header {
     font-family: VK Bold, system-ui, Helvetica Neue, Roboto, sans-serif;;
 }
 .svg-group .vkuiGroup__inner,
@@ -16,8 +16,26 @@
     overflow: hidden;
     position: relative;
 }
+@media (max-width: 768px) {
+    .svg-group .vkuiGroup__separator {
+        padding-top: 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .svg-group .vkuiSeparator__in {
+        width: 120%;
+        position: absolute;
+        margin: 0 !important;
+    }
+}
+
 .place-left .vkuiPlaceholder__in {
     text-align: left;
     padding-bottom: 10px;
     padding-top: 20px;
+}
+.placeholder-mini .vkuiPlaceholder__in {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

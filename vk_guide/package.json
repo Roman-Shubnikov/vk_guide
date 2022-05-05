@@ -1,6 +1,8 @@
 {
   "name": "mini-app",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "start": "cross-env PORT=10888 HTTPS=true react-scripts start",
     "tunnel": "vk-tunnel --insecure=1 --http-protocol=https --ws-protocol=wss --host=localhost --port=10888",
@@ -9,49 +11,42 @@
     "predeploy": "npm run build",
     "deploy": "vk-miniapps-deploy"
   },
-  "engines": {
-    "node": ">=12.0.0"
-  },
+  "homepage": "./",
   "keywords": [],
+  "author": "",
   "license": "MIT",
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "cross-env": "^5.2.0",
+    "react-hot-loader": "^4.9.0",
+    "react-scripts": "^3.4.1",
+    "terser-brunch": "^4.0.0"
+  },
   "dependencies": {
     "@redux-devtools/extension": "^3.2.2",
-    "@sentry/react": "^6.19.7",
-    "@sentry/tracing": "^6.19.7",
-    "@vkontakte/icons": "1.141.1",
+    "@sentry/node": "^5.26.0",
+    "@sentry/react": "^6.19.2",
+    "@sentry/tracing": "^6.19.2",
+    "@types/react": "^17.0.14",
+    "@vkontakte/icons": "^1.146.0",
     "@vkontakte/mvk-mini-apps-scroll-helper": "^1.2.0",
-    "@vkontakte/vk-bridge": "latest",
-    "@vkontakte/vk-miniapps-deploy": "0.0.25",
-    "@vkontakte/vkjs": "0.20.0",
-    "@vkontakte/vkui": "4.28.1",
+    "@vkontakte/vk-bridge": "^2.5.3",
+    "@vkontakte/vk-miniapps-deploy": "0.0.17",
+    "@vkontakte/vk-qr": "^2.0.10",
+    "@vkontakte/vkjs": "^0.20.0",
+    "@vkontakte/vkui": "^4.28.0",
     "babel-eslint": "^10.1.0",
-    "eruda": "^2.4.1",
+    "eruda": "^2.2.0",
     "eruda-code": "^2.0.0",
     "eruda-dom": "^2.0.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
     "prop-types": "^15.7.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-redux": "^8.0.1",
-    "redux": "^4.2.0",
-    "redux-devtools-extension": "^2.13.9",
+    "react": "^16.14.0",
+    "react-dom": "^16.9.0",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.4.1"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "devDependencies": {
-    "cross-env": "^7.0.3",
-    "react-hot-loader": "^4.13.0",
-    "react-scripts": "^4.0.3"
-  },
-  "resolutions": {
-    "react-scripts/webpack-dev-server/yargs/yargs-parser": ">=18.1.2"
-  },
-  "overrides": {
-    "es5-ext@^0.10.50": "0.10.53"
   },
   "browserslist": {
     "production": [

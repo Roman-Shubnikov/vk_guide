@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { viewsStructure } from "../config";
 import { viewsActions } from "../store/main";
 import * as Sentry from "@sentry/react";
 import bridge from '@vkontakte/vk-bridge'; // VK Brige
@@ -70,8 +69,8 @@ export const useNavigation = () => {
     const goDisconnect = (e=null) => {
         console.log(e)
         Sentry.captureException(e);
-        dispatch(viewsActions.setGlobalError(e))
-        goPanel(viewsStructure.Disconnect.navName, viewsStructure.Disconnect.panels.homepanel, true, false);
+        // dispatch(viewsActions.setGlobalError(e))
+        // goPanel(viewsStructure.Disconnect.navName, viewsStructure.Disconnect.panels.homepanel, true, false);
     }
     return {
         goPanel,

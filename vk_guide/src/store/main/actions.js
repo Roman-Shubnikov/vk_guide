@@ -5,6 +5,7 @@ import {
 
 export const accountActions = {
     setScheme: (payload) => ({type: accountActionTypes.SET_SCHEME, payload}),
+    setUserToken: (payload) => ({ type: accountActionTypes.SET_USER_TOKEN, payload})
     
 }
 export const viewsActions = {
@@ -17,5 +18,6 @@ export const viewsActions = {
     setNeedEpic: (payload) => ({ type: viewsActionTypes.SET_NEED_EPIC, payload}),
     setSnackbar: (payload) => ({ type: viewsActionTypes.SET_SNACKBAR, payload}),
     setPopout: (payload) => ({ type: viewsActionTypes.SET_POPOUT, payload}),
-    setGlobalError: (payload) => ({ type: viewsActionTypes.SET_GLOBAL_ERROR, payload})
+    setGlobalError: (payload) => ({ type: viewsActionTypes.SET_GLOBAL_ERROR, payload}),
+    
 }

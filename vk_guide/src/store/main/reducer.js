@@ -9,6 +9,7 @@ const initalStateAccount = {
         scheme: "bright_light",
         default_scheme: "bright_light",
     },
+    userToken: null,
 }
 const initalStateViews = {
     account: {},
@@ -27,6 +28,8 @@ export const accountReducer = (state = initalStateAccount, action) => {
     switch(action.type) {
         case accountActionTypes.SET_SCHEME:
             return { ...state, schemeSettings: {...state.schemeSettings, ...action.payload}}
+        case accountActionTypes.SET_USER_TOKEN:
+            return {...state, userToken: action.payload}
         default: 
             return state
 

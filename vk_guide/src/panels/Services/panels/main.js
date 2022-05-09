@@ -9,79 +9,51 @@ import {
     Header,
     HorizontalScroll,
     SegmentedControl,
-    CellButton,
     Avatar,
     SimpleCell,
-    PanelSpinner,
+    Banner,
+    Button,
 } from '@vkontakte/vkui';
 import { SVGFeathering, SVGMiniapps, SVGServicevk } from '../../../svg';
 import {
-    Icon56ServicesOutline,
-    Icon28GridLayoutOutline,
+    Icon56MessageOutline,
+    Icon56AdvertisingOutline,
+    Icon24CheckCircleOutline,
 } from '@vkontakte/icons';
-import { SERVICES } from '../../../config';
-import { useUser } from '../../../hooks';
-
+import { CHANNELS, CHANNELS_IMG_URL, SERVICES } from '../../../config';
 const Cards = [
     {
-        link: 'https://vk.com/@guidevk-miniapps',
+        link: 'https://vk.com/@guidevk-channel',
         svg: SVGMiniapps,
     },
     {
-        link: 'https://vk.com/@guidevk-servicevk',
+        link: 'https://vk.com/@guidevk-chats',
         svg: SVGServicevk,
     },
     {
-        link: 'https://vk.com/@guidevk-feathering',
+        link: 'https://vk.com/@guidevk-publication',
         svg: SVGFeathering,
     },
 ]
 
 
 export const Main = props => {
-    const { userToken } = useUser();
     const [otherCategory, setOtherCategory] = useState('tools');
-    const services_vk = SERVICES.vk.map((service) => service.service_id).flat();
-    const services_other = Object.keys(SERVICES.other).map((category, i) => (SERVICES.other[category].map((service) => service.service_id))).flat();
     const [servicesInfo, setServicesInfo] = useState(null);
 
-    const getInfoVkService = (id) => {
-        return SERVICES.vk.find((service) => service.service_id === id);
-    }
     const getInfoOtherService = (category, id) => {
         return SERVICES.other[category].find((service) => service.service_id === id);
-    }
-    const getVkServices = () => {
-        return servicesInfo.filter((service) => services_vk.includes(service.id))
     }
     const getOtherServicesByCategory = (category) => {
         let category_ids = SERVICES.other[category].map((service) => service.service_id)
         return servicesInfo.filter((service) => category_ids.includes(service.id))
     }
-    useEffect(() => {
-        let service_ids = services_vk.concat(services_other);
-        bridge.send("VKWebAppCallAPIMethod",
-        { 
-            method: 'apps.get',
-            params: {
-                app_ids: service_ids.join(','),
-                access_token: userToken,
-                v: '5.131',
-            },
-            
-        })
-        .then((data) => {
-            setServicesInfo(data.response.items);
-            console.log(data.response.items)
-        })
-        .catch((e) => console.log(e))
-        
-    }, [userToken]);
     return (
         <Panel id={props.id}>
             <PanelHeader>
-                Сервисы
+                Каналы
             </PanelHeader>
+            
             <Group>
                 <HorizontalScroll>
                     <div style={{ display: "flex" }}>
@@ -98,31 +70,40 @@ export const Main = props => {
                     </div>
                 </HorizontalScroll>
             </Group>
-            <Group header={<Header>От ВКонтакте</Header>}>
-                {servicesInfo ? getVkServices().length > 0 ? getVkServices().map((service) => (
-                    <SimpleCell
-                    onClick={() => bridge.send("VKWebAppOpenApp", {"app_id": service.id})}
-                    key={service.id}
-                    multiline
-                    before={<Avatar mode='image' size={72} src={service.icon_139} alt='ava' />}
-                    description={getInfoVkService(service.id).description}>
-                        {service.title}
-                    </SimpleCell>
-                )): 
-                <Placeholder header="Сервисов пока нет" icon={<Icon56ServicesOutline />}>
-                    Здесь будут отображаться сервисы, которые могут понравиться пользователям
-                </Placeholder> : <PanelSpinner height={252} />}
-                
-                <CellButton
-                multiline
-                target="_blank" rel="noopener noreferrer"
-                href='https://vk.com/services'
-                before={<Avatar mode='image' size={72}><Icon28GridLayoutOutline /></Avatar>}>
-                    Перейти в каталог мини-приложений
-                </CellButton>
+            <Group>
+                <Banner
+                    before={<Icon24CheckCircleOutline style={{color: 'var(--accent)'}} />}
+                    header="Публикация в каталоге"
+                    subheader='Название и оформление канала или чата присваивается при
+                    публикации. Если вы владелец и хотите обновить содержимое,
+                    свяжитесь с нами'
+                    actions={
+                    <Button
+                    target="_blank" rel="noopener noreferrer"
+                    href='https://vk.me/guidevk'>
+                        Написать сообщение
+                    </Button>
+                    }
+                />
             </Group>
-            <Group header={<Header>От сторонних разработчиков</Header>}>
-                <Div>
+            <Group header={<Header>Каналы</Header>}>
+                {CHANNELS.length > 0 ? CHANNELS.map(channel => (
+                    <SimpleCell
+                        target="_blank" rel="noopener noreferrer"
+                        href={channel.link}
+                        key={channel.title}
+                        multiline
+                        before={<Avatar mode='image' size={72} src={CHANNELS_IMG_URL + channel.avatar} alt='ava' />}
+                        description={channel.caption}>
+                            {channel.title}
+                        </SimpleCell>)) : 
+                        <Placeholder header="Находите интересное" icon={<Icon56AdvertisingOutline />}>
+                            Здесь будут отображаться каналы от интересных авторов и крупных сообществ
+                        </Placeholder>
+                    }
+            </Group>
+            <Group header={<Header>Чаты</Header>}>
+                {/* <Div>
                     <SegmentedControl
                     value={otherCategory}
                     onChange={e => setOtherCategory(e)}
@@ -140,20 +121,11 @@ export const Main = props => {
                             value: "education",
                         },
                     ]} />
-                </Div>
-                {servicesInfo ? getOtherServicesByCategory(otherCategory).length > 0 ? getOtherServicesByCategory(otherCategory).map((service) => (
-                    <SimpleCell
-                    onClick={() => bridge.send("VKWebAppOpenApp", {"app_id": service.id})}
-                    key={service.id}
-                    multiline
-                    before={<Avatar src={service.icon_139} alt='ava' />}
-                    description={getInfoOtherService(otherCategory, service.id).description}>
-                        {service.title}
-                    </SimpleCell>
-                )): 
-                <Placeholder header="Сервисов пока нет" icon={<Icon56ServicesOutline />}>
-                    Здесь будут отображаться сервисы, которые могут понравиться пользователям
-                </Placeholder>: <PanelSpinner />}
+                </Div> */}
+                
+                <Placeholder header="Находите общение" icon={<Icon56MessageOutline />}>
+                    Здесь будут отображаться групповые чаты, в которые вы можете вступить и начать новое общение
+                </Placeholder>
                 
             </Group>
         </Panel>

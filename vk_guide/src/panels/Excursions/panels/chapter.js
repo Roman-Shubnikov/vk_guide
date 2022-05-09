@@ -62,14 +62,20 @@ const Chapters = props => {
             </PanelHeader>
             {IS_MOBILE ||
             <Group className='svg-group'>
-                <img src={IMAGES_URL + Category.img} style={{minHeight:272, minWidth: 534, marginTop: 20}} alt={Category.name} /> 
+                <img 
+                className='chapter_header-img'
+                src={IMAGES_URL + Category.img}
+                alt={Category.name} />
             </Group>
             }
             <Group>
                 {IS_MOBILE &&
                 <Div>
                     <Card className='svg-group'>
-                        <img src={IMAGES_URL + Category.img} style={{minHeight:272, minWidth: 534, marginTop: 20}} alt={Category.name} /> 
+                        <img 
+                        className='chapter_header-img'
+                        src={IMAGES_URL + Category.img}
+                        alt={Category.name} />
                     </Card>
                 </Div>
                 }

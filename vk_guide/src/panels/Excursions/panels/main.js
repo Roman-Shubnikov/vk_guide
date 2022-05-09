@@ -25,21 +25,11 @@ export const Main = props => {
             </PanelHeader>
             <Group>
                 <Placeholder header='Узнайте о ВКонтакте больше'
-                className='vk-sans placeholder-mini'
+                className='vk-sans'
                 icon={<SVGLogo />}>
                     Впервые ВКонтакте, давно не заходили или просто не следили за обновлениями? 
                     Сейчас мы расскажем обо всем. Выбирайте интересующую категорию
-                    <Card style={{marginTop: 30, textAlign: 'left'}}>
-                        <MiniInfoCell
-                        before={<Icon20PinOutline />}
-                        textWrap='full'>
-                            Данный сервис не является официальным продуктом ВКонтакте. Друзья, не дайте себя обмануть!
-                        </MiniInfoCell>
-                    </Card>
                 </Placeholder>
-                <Div>
-                    
-                </Div>
             </Group>
             <Group>
                 <Div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>

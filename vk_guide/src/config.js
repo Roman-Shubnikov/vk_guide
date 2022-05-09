@@ -39,6 +39,7 @@ import { LinkHandler } from './Utils';
 
 export const APP_ID = 8154914;
 export const IMAGES_URL = process.env.PUBLIC_URL + '/img';
+export const CHANNELS_IMG_URL = process.env.PUBLIC_URL + '/img/channels_avatar';
 export const viewsStructure = {
     Excursions: {
         navName: 'Excursions',
@@ -56,7 +57,7 @@ export const viewsStructure = {
     },
     Services: {
         navName: 'Services',
-        name: 'Полезные сервисы',
+        name: 'Чаты и каналы',
         panels: {
             homepanel: 'home',
         },
@@ -548,4 +549,31 @@ export const SERVICES = {
         ]
     }
 }
+
+export const CHANNELS = [
+    {
+        avatar: '/consequence.jpg',
+        title: 'Consequence_s Photography',
+        caption: 'Фотограф',
+        link: 'https://vk.me/join/Dm0QlpWbBl2aautrqois4X3jQNFoW226kug=',
+    },
+    {
+        avatar: '/vpsh.jpg',
+        title: 'ВПШ',
+        caption: 'Интернет-СМИ',
+        link: 'https://vk.me/join/4P2RiPZM3mAOMMw7951ynA8/iKuSgB1jLbc=',
+    },
+    {
+        avatar: '/ce.jpg',
+        title: 'Це канал',
+        caption: 'Бизнес',
+        link: 'https://vk.me/join/dYQUIpctOO3sEq1MfE2/49P3r7HnoGWDLgs=',
+    },
+    {
+        avatar: '/rhymes.jpg',
+        title: 'Рифмы и Новости',
+        caption: 'Блог',
+        link: 'https://vk.me/join/gSUph1elksZ2XRqSbWY8yzN5Z7AJiITHD1c=',
+    },
+]
 export const IS_MOBILE = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));

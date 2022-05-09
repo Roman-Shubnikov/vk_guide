@@ -24,7 +24,7 @@ import {
 import {
 	Icon28LogoVkOutline,
 	Icon28Users3Outline,
-	Icon28ServicesOutline,
+	Icon28AdvertisingOutline,
 } from '@vkontakte/icons';
 import '@vkontakte/vkui/dist/vkui.css';
 import './styles/styles.css';
@@ -243,8 +243,8 @@ const App = () => {
 								data-story={viewsStructure.Services.navName}
 								selected={activeStory === viewsStructure.Services.navName}
 								onClick={onEpicTap}
-								text='Сервисы'>
-									<Icon28ServicesOutline />
+								text='Каналы'>
+									<Icon28AdvertisingOutline />
 								</TabbarItem>
 							</Tabbar>
 						}>
@@ -274,7 +274,7 @@ const App = () => {
                           {viewsStructure.Communites.name}
                         </EpicItemPC>
                         <EpicItemPC
-                        icon={<Icon28ServicesOutline />}
+                        icon={<Icon28AdvertisingOutline />}
                         story={viewsStructure.Services.navName}
                         activeStory={activeStory}
                         onClick={(e) => {setHash('');goPanel(e.currentTarget.dataset.story, viewsStructure.Services.panels.homepanel)}}>

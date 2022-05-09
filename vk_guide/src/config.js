@@ -291,6 +291,10 @@ export const OFFICIAL_COMMUNITES = {
             community_id: 76477496,
             description: 'Рассказываем о талантливых людях и интересных страницах ВКонтакте',
         },
+        {
+            community_id: 212758174,
+            description: 'Коворкинг VK',
+        },
     ],
     countries: [
         {
@@ -318,6 +322,10 @@ export const OFFICIAL_COMMUNITES = {
         {
             community_id: 777107,
             description: 'Советы по информационной безопасности и защите профиля',
+        },
+        {
+            community_id: 179680337,
+            description: 'Опросы от Команды ВКонтакте',
         },
     ],
     development: [
@@ -570,10 +578,43 @@ export const CHANNELS = [
         link: 'https://vk.me/join/dYQUIpctOO3sEq1MfE2/49P3r7HnoGWDLgs=',
     },
     {
+        avatar: '/covid.jpg',
+        title: 'СтопКоронавирус.РФ',
+        caption: 'Здоровье',
+        link: 'https://vk.me/join/AJQ1d/0YKBeSelJmgW0KiNbe',
+    },
+    {
+        avatar: '/it.jpg',
+        title: 'Новости IT',
+        caption: 'Информационные технологии и интернет',
+        link: 'https://vk.me/join/0kEblcVoYljelOUBUKDCtAuARBOdRqR1Ask=',
+    },
+    {
         avatar: '/rhymes.jpg',
         title: 'Рифмы и Новости',
         caption: 'Блог',
         link: 'https://vk.me/join/gSUph1elksZ2XRqSbWY8yzN5Z7AJiITHD1c=',
     },
+    {
+        avatar: '/extreme.jpg',
+        title: 'Extreme Family Vision',
+        caption: 'Туризм и путешествия',
+        link: 'https://vk.me/join/88eNiZTz60e/CF5yYEX/Y6IUyjolYBWkS0k=',
+    },
+    {
+        avatar: '/testers.jpg',
+        title: 'VK Testers',
+        caption: 'Тестирование и VK',
+        link: 'https://vk.me/join/HiuxmCchlkLTOPizMWa7AQQZzBIAhkb5320=',
+    },
 ]
+// export const CHATS = [
+//     {
+//         avatar: '/rhymes.jpg',
+//         name: 'Рифмы и Новости',
+//         caption: 'Блог',
+//         category: '',
+//         link: 'https://vk.me/join/gSUph1elksZ2XRqSbWY8yzN5Z7AJiITHD1c=',
+//     }
+// ]
 export const IS_MOBILE = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));

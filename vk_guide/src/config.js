@@ -16,6 +16,8 @@ import {
     Icon28HeartCircleOutline,
     Icon28MoneyCircleOutline,
     Icon28PodcastOutline,
+    Icon28LogoVkOutline,
+    Icon28HelpCircleOutline,
     Icon20UserCircleOutline,
     Icon20MessageOutline,
     Icon20ServicesOutline,
@@ -32,10 +34,13 @@ import {
     Icon20LikeOutline,
     Icon20MoneyCircleOutline,
     Icon20PodcastOutline,
+    Icon20LogoVkOutline,
+    Icon20LifebuoyOutline,
 
 } from '@vkontakte/icons';
 
 import { LinkHandler } from './Utils';
+import { Button } from '@vkontakte/vkui';
 
 export const APP_ID = 8154914;
 export const IMAGES_URL = process.env.PUBLIC_URL + '/img';
@@ -262,6 +267,41 @@ export const CATEGORIES = [
         community_id: 170417593,
         mini_icon: Icon20PodcastOutline,
         link_button: 'https://vk.com/podcasts',
+    },
+    {
+        name: 'VK ID',
+        icon: <Icon28LogoVkOutline />,
+        category: 'id',
+        button_text: 'VK ID',
+        description: <span>VK ID — это единый аккаунт для сервисов VK. Заказывайте еду, вызывайте такси, выбирайте подарки и оплачивайте покупки с помощью одного аккаунта. Для этого выберите вход через VK ID.
+        <br/><br/>Личный кабинет VK ID предоставляет вам возможность редактировать личные и контактные данные, управлять сервисами и сессиями, а также платёжными инструментами и подписками. Попасть в него можно по ссылке или через точку входа, расположенную в мобильных приложениях и веб-сайтах сервисов, подключённых к VK ID.
+        <br/><br/>Если на вашем устройстве установлено приложение ВКонтакте или другие приложения с подключённым VK ID, то вы сможете в одно нажатие авторизоваться в других сервисах экосистемы, в которые интегрирован VK ID. Актуальный список сервисов представлен в разделе с сервисами и сайтами. </span>,
+        access_on_mobile: false,
+        img: '/id.png',
+        mini_icon: Icon20LogoVkOutline,
+        link_button: 'https://id.vk.com/account',
+    },
+    {
+        name: 'Помощь',
+        icon: <Icon28HelpCircleOutline />,
+        category: 'support',
+        description: <span>В первую очередь, хотим отметить: не «Техподдержка», а просто «Поддержка». Запомнили? Едем дальше. :)
+        <br/><br/>Помощь — это тот самый раздел, где собраны все ответы на все вопросы ВКонтакте. Например: как оплатить VK Музыку, как сменить пароль, что такое верификация, как стать агентом поддержки, как удалить свой старый профиль, как позвонить сыну маминой подруги и множество других вопросов и ответов на всевозможные вопросы.
+        <br/><br/>Не получилось найти желаемое самостоятельно? Попробуйте воспользоваться строкой поиска, если результата нет, убедитесь, что в текст не прокрались опечатки.
+        <br/><br/>Если какая-то статья не полностью отвечает на ваш вопрос, нажмите «Это не решает мою проблему», а затем «У меня остались вопросы» – так вы сможете обратиться в службу Поддержки.
+        <br/><br/>Если вы не нашли нужную статью, нажмите «Ни один из этих вариантов не подходит» под списком статей в выдаче и задайте свой вопрос в Поддержку. Вы также можете задать вопрос прямо отсюда, достаточно нажать кнопку «Задать вопрос».
+        </span>,
+        addition: <Button mode='secondary'
+        target="_blank" rel="noopener noreferrer"
+        href="https://vk.com/support?act=new"
+        size='m'>
+            Задать вопрос
+        </Button>,
+        access_on_mobile: false,
+        img: '/support.png',
+        community_id: 22884714,
+        mini_icon: Icon20LifebuoyOutline,
+        link_button: 'https://vk.com/support?act=home',
     },
 ]
 

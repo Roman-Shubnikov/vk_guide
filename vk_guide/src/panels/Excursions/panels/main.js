@@ -7,9 +7,7 @@ import {
     SimpleCell,
     Div,
     Card,
-    MiniInfoCell,
 } from '@vkontakte/vkui';
-import { Icon20PinOutline } from '@vkontakte/icons';
 
 import { SVGLogo } from '../../../svg';
 import { CATEGORIES } from '../../../config';

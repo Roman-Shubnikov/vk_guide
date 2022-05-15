@@ -115,7 +115,8 @@ const Chapters = props => {
                         href={Category.video_instruction}>
                             Пошаговая видеоинструкция
                         </Button>}
-                        
+                        {'addition' in Category && 
+                        Category.addition}
                     </ButtonGroup>
                     
                 </Div>}

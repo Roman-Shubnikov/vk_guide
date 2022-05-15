@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import bridge from '@vkontakte/vk-bridge';
+import React from 'react';
 import {
     Panel, 
     PanelHeader, 
     Placeholder,
     Group,
-    Div,
     Header,
     HorizontalScroll,
-    SegmentedControl,
     Avatar,
     SimpleCell,
     Banner,
@@ -20,7 +17,7 @@ import {
     Icon56AdvertisingOutline,
     Icon24CheckCircleOutline,
 } from '@vkontakte/icons';
-import { CHANNELS, CHANNELS_IMG_URL, SERVICES } from '../../../config';
+import { CHANNELS, CHANNELS_IMG_URL } from '../../../config';
 const Cards = [
     {
         link: 'https://vk.com/@guidevk-channel',
@@ -38,16 +35,6 @@ const Cards = [
 
 
 export const Main = props => {
-    const [otherCategory, setOtherCategory] = useState('tools');
-    const [servicesInfo, setServicesInfo] = useState(null);
-
-    const getInfoOtherService = (category, id) => {
-        return SERVICES.other[category].find((service) => service.service_id === id);
-    }
-    const getOtherServicesByCategory = (category) => {
-        let category_ids = SERVICES.other[category].map((service) => service.service_id)
-        return servicesInfo.filter((service) => category_ids.includes(service.id))
-    }
     return (
         <Panel id={props.id}>
             <PanelHeader>
@@ -103,25 +90,6 @@ export const Main = props => {
                     }
             </Group>
             <Group header={<Header>Чаты</Header>}>
-                {/* <Div>
-                    <SegmentedControl
-                    value={otherCategory}
-                    onChange={e => setOtherCategory(e)}
-                    options={[
-                        {
-                            label: 'Инструменты',
-                            value: "tools",
-                        },
-                        {
-                            label: 'Общение',
-                            value: "communication",
-                        },
-                        {
-                            label: 'Образование',
-                            value: "education",
-                        },
-                    ]} />
-                </Div> */}
                 
                 <Placeholder header="Находите общение" icon={<Icon56MessageOutline />}>
                     Здесь будут отображаться групповые чаты, в которые вы можете вступить и начать новое общение

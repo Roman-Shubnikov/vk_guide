@@ -4,7 +4,7 @@ import {
     Icon28MessageOutline,
     Icon28ServicesOutline,
     Icon28ListOutline,
-    Icon28ClipOutline,
+    Icon28LogoClipsOutline,
     Icon28TearOffFlyerOutline,
     Icon28Users3Outline,
     Icon28VinylOutline,
@@ -22,7 +22,7 @@ import {
     Icon20MessageOutline,
     Icon20ServicesOutline,
     Icon20MenuOutline,
-    Icon20GesturePlayOutline,
+    Icon20LogoClipsOutline,
     Icon20TearOffFlyerOutline,
     Icon20Users3Outline,
     Icon20VinylOutline,
@@ -56,13 +56,6 @@ export const viewsStructure = {
     Communites: {
         navName: 'Communites',
         name: 'Официальные сообщества',
-        panels: {
-            homepanel: 'home',
-        },
-    },
-    Services: {
-        navName: 'Services',
-        name: 'Чаты и каналы',
         panels: {
             homepanel: 'home',
         },
@@ -128,14 +121,14 @@ export const CATEGORIES = [
     },
     {
         name: 'Клипы',
-        icon: <Icon28ClipOutline />,
+        icon: <Icon28LogoClipsOutline />,
         category: 'clips',
         description: <span>«Клипы» — бесконечная лента коротких роликов на четвёртой вкладке.<br/><br/>Каждый день здесь появляется множество новых клипов, и алгоритм выбирает те, что понравятся именно вам. А самые популярные клипы ищите в подборках раздела «Тренды».<br/><br/>А если вы сами хотите снять и выложить клип, смотрите нашу пошаговую видеоинструкцию.</span>,
         access_on_mobile: false,
         img: '/clips.png',
         video_instruction: 'https://vk.com/video-27902394_456239581',
         community_id: 194351072,
-        mini_icon: Icon20GesturePlayOutline,
+        mini_icon: Icon20LogoClipsOutline,
         link_button: 'https://vk.com/clips',
     },
     {
@@ -335,6 +328,14 @@ export const OFFICIAL_COMMUNITES = {
             community_id: 212758174,
             description: 'Коворкинг VK',
         },
+        {
+            community_id: 211669834,
+            description: 'Для представителей СМИ',
+        },
+        {
+            community_id: 208050206,
+            description: 'Об экосистеме',
+        },
     ],
     countries: [
         {
@@ -415,6 +416,10 @@ export const OFFICIAL_COMMUNITES = {
             community_id: 186112991,
             description: 'Получайте бонусы за покупки',
         },
+        {
+            community_id: 179862327,
+            description: 'Переводим ВКонтакте',
+        },
     ],
     mobile_apps: [
         {
@@ -461,6 +466,10 @@ export const OFFICIAL_COMMUNITES = {
             community_id: 212221031,
             description: 'Эффективнее. Быстрее. Точнее.',
         },
+        {
+            community_id: 200562297,
+            description: 'Онлайн-конференция',
+        },
     ],
     charity: [
         {
@@ -494,6 +503,10 @@ export const OFFICIAL_COMMUNITES = {
         {
             community_id: 197864572,
             description: 'Сообщество, где рассказывают полезные материлы, чтобы поддерживать свое здоровье в норме',
+        },
+        {
+            community_id: 207167398,
+            description: 'Занимайтесь спортом прямо дома',
         },
     ],
     music: [

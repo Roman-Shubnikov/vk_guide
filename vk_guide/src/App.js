@@ -24,7 +24,6 @@ import {
 import {
 	Icon28LogoVkOutline,
 	Icon28Users3Outline,
-	Icon28AdvertisingOutline,
 } from '@vkontakte/icons';
 import '@vkontakte/vkui/dist/vkui.css';
 import './styles/styles.css';
@@ -33,7 +32,7 @@ import { APP_ID, IS_MOBILE, viewsStructure } from './config';
 import { useSelector, useDispatch } from 'react-redux';
 import { accountActions, viewsActions } from './store/main';
 import { EpicItemPC } from './components';
-import { Excursions, Communites, Services } from './panels';
+import { Excursions, Communites } from './panels';
 
 var DESKTOP_SIZE = 1000;
 var TABLET_SIZE = 900;
@@ -111,6 +110,7 @@ const App = () => {
 		  let {view, panel} = historyPanels[historyPanels.length - 2];
 		  goPanel(view, panel, true, true)
 		}
+		// eslint-disable-next-line
 	  }, [historyPanels, activeStory, goPanel])
 	const goBack = useCallback(() => {
 	let history = [...historyPanels]
@@ -210,7 +210,6 @@ const App = () => {
   	const Views = [
 		<Excursions id={viewsStructure.Excursions.navName} key={'1'} />,
 		<Communites id={viewsStructure.Communites.navName} key={'2'} />,
-		<Services id={viewsStructure.Services.navName} key={'3'} />,
 	  ]
 	return (
 		<ConfigProvider scheme={scheme} platform={platform.current}>
@@ -239,13 +238,6 @@ const App = () => {
 								text='Сообщества'>
 									<Icon28Users3Outline />
 								</TabbarItem>
-								<TabbarItem
-								data-story={viewsStructure.Services.navName}
-								selected={activeStory === viewsStructure.Services.navName}
-								onClick={onEpicTap}
-								text='Каналы'>
-									<Icon28AdvertisingOutline />
-								</TabbarItem>
 							</Tabbar>
 						}>
 							
@@ -272,13 +264,6 @@ const App = () => {
                         activeStory={activeStory}
                         onClick={(e) => {setHash('');goPanel(e.currentTarget.dataset.story, viewsStructure.Communites.panels.homepanel)}}>
                           {viewsStructure.Communites.name}
-                        </EpicItemPC>
-                        <EpicItemPC
-                        icon={<Icon28AdvertisingOutline />}
-                        story={viewsStructure.Services.navName}
-                        activeStory={activeStory}
-                        onClick={(e) => {setHash('');goPanel(e.currentTarget.dataset.story, viewsStructure.Services.panels.homepanel)}}>
-                          {viewsStructure.Services.name}
                         </EpicItemPC>
                       </Group>
                       </>

@@ -11,11 +11,11 @@ import {
 
 import { SVGLogo } from '../../../svg';
 import { CATEGORIES } from '../../../config';
-import { useNavigation } from '../../../hooks';
+import { useNavigation, useToken } from '../../../hooks';
 
 export const Main = props => {
     const { goPanel, activeStory } = useNavigation();
-
+    const { userToken, getPlaceholder } = useToken();
     return (
         <Panel id={props.id}>
             <PanelHeader>
@@ -28,7 +28,11 @@ export const Main = props => {
                     Впервые ВКонтакте, давно не заходили или просто не следили за обновлениями? 
                     Сейчас мы расскажем обо всем. Выбирайте интересующую категорию
                 </Placeholder>
+                
             </Group>
+            {!userToken && <Group>
+                {getPlaceholder('cell')}
+            </Group>}
             <Group>
                 <Div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
                     <ul style={{

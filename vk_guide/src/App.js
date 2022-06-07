@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback, useRef } from 'react';
+import React, {useEffect, useCallback, useRef, useState } from 'react';
 import bridge from '@vkontakte/vk-bridge';
 import {
 	AdaptivityProvider,
@@ -28,7 +28,7 @@ import {
 import '@vkontakte/vkui/dist/vkui.css';
 import './styles/styles.css';
 import { useNavigation, useUser } from './hooks';
-import { APP_ID, IS_MOBILE, viewsStructure } from './config';
+import { IS_MOBILE, viewsStructure } from './config';
 import { useSelector, useDispatch } from 'react-redux';
 import { accountActions, viewsActions } from './store/main';
 import { EpicItemPC } from './components';
@@ -79,13 +79,13 @@ const App = () => {
 	const dispatch = useDispatch();
 	const { setUserToken } = useUser();
 	const { schemeSettings } = useSelector((state) => state.account);
+	const [chapter, setChapter] = useState('profile');
 	const { scheme, default_scheme } = schemeSettings;
 	const {
 		activeStory, 
 		historyPanels, 
 		goPanel,
 		popout,
-		goDisconnect,
 		setPopout } = useNavigation();
 	const need_epic = useSelector((state) => state.views.need_epic)
 	const setScheme = useCallback((payload) => dispatch(accountActions.setScheme(payload)), [dispatch])
@@ -98,14 +98,27 @@ const App = () => {
 		}
 	  }
 	const AppInit = useCallback(() => {
-		bridge.send("VKWebAppGetAuthToken", {
-			app_id: APP_ID,
-			scope: '',
+		bridge.send("VKWebAppStorageGet", {keys: ['userToken']})
+		.then((storage) => {
+			let value = storage.keys.find(key => key.key === 'userToken').value
+			if(value !== '') {
+				bridge.send("VKWebAppCallAPIMethod", { 
+					method: 'groups.getById',
+					params: {
+						group_id: 1, 
+						access_token: value, 
+						fields: 'verified,members_count',
+						v: '5.131',
+					},
+					
+				}).then(response => {
+					setUserToken(value);
+				}).catch(error => {
+					bridge.send("VKWebAppStorageSet", {key: 'userToken', value: ''})
+				});
+				
+			}
 		})
-		.then((data) => {
-			setUserToken(data.access_token)
-		})
-		.catch(goDisconnect)
 		if( activeStory === 'disconnect') {
 		  let {view, panel} = historyPanels[historyPanels.length - 2];
 		  goPanel(view, panel, true, true)
@@ -178,9 +191,14 @@ const App = () => {
 		const brigeSchemeChange = (params) => {
 			bridge.send("VKWebAppSetViewSettings", params);
 		}
-		setScheme({ scheme: IS_MOBILE ? 'bright_light' : 'vkcom_light' })
+		setScheme({ scheme: default_scheme })
 		if (IS_MOBILE) {
-			brigeSchemeChange(scheme_params.bright_light)
+			if('bright_light' === default_scheme) {
+				brigeSchemeChange(scheme_params.bright_light)
+			} else {
+				brigeSchemeChange(scheme_params.space_gray)
+			}
+			
 		}
 	}, [default_scheme, setScheme])
 	
@@ -208,7 +226,10 @@ const App = () => {
   }, [viewWidth, platform])
   
   	const Views = [
-		<Excursions id={viewsStructure.Excursions.navName} key={'1'} />,
+		<Excursions id={viewsStructure.Excursions.navName} 
+		key={'1'}
+		setChapter={setChapter}
+		chapter={chapter} />,
 		<Communites id={viewsStructure.Communites.navName} key={'2'} />,
 	  ]
 	return (

@@ -79,7 +79,7 @@ const Chapters = props => {
                     </Card>
                 </Div>
                 }
-                {'community_id' in Category && (community ? <>
+                {'community_id' in Category && userToken && (community ? <>
                 <RichCell
                 target="_blank" rel="noopener noreferrer"
                 href={'https://vk.com/' + community.screen_name}

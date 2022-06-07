@@ -13,7 +13,7 @@ import { OFFICIAL_COMMUNITES } from '../../../config';
 import {
     Icon16Verified,
 } from '@vkontakte/icons';
-import { useUser } from '../../../hooks';
+import { useToken } from '../../../hooks';
 
 
 const GroupCell = ({children, caption, ava, verified, link}) => {
@@ -33,7 +33,7 @@ const GroupCell = ({children, caption, ava, verified, link}) => {
 }
 
 export const Main = props => {
-    const { userToken } = useUser();
+    const { userToken, getPlaceholder } = useToken();
     const [communitiesInfo, setCommunitiesInfo] = useState(null);
     const getCategoryIds = (category) => {
         return OFFICIAL_COMMUNITES[category].map((cat) => cat.community_id)
@@ -87,7 +87,10 @@ export const Main = props => {
             <PanelHeader>
                 Сообщества
             </PanelHeader>
-            {communitiesInfo ? null : <Group>
+            {!userToken && <Group>
+                {getPlaceholder('placeholder')}
+                </Group>}
+            {communitiesInfo || !userToken ? null : <Group>
                 <PanelSpinner />
             </Group>}
             {communitiesInfo && <>

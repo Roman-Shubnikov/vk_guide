@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from '@vkontakte/vkui';
 import { useNavigation } from '../../hooks';
@@ -7,7 +7,7 @@ import { Chapter, Main } from './panels';
 
 const Excursion = props => {
     const { activePanel } = useNavigation();
-    const [chapter, setChapter] = useState('profile');
+    const { setChapter, chapter } = props;
     return (
         <View activePanel={activePanel} 
         id={props.id}>

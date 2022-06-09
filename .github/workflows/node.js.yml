@@ -31,6 +31,6 @@ jobs:
         zip -r odr.zip *
         ls
         cd ../..
-        cp -a php/ build/
+        cp -a php/ vk_guide/build/
         cd vk_guide/build
         rsync -e "ssh -i $HOME/.ssh/SSH_KEY -o StrictHostKeyChecking=no" --archive --compress --delete . root@89.223.126.48:/var/www/xelene.ru/vk_guide

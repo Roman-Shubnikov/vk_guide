@@ -8,12 +8,11 @@ import {
     Avatar,
     PanelSpinner,
 } from '@vkontakte/vkui';
-import bridge from '@vkontakte/vk-bridge';
 import { OFFICIAL_COMMUNITES } from '../../../config';
 import {
     Icon16Verified,
 } from '@vkontakte/icons';
-import { useToken } from '../../../hooks';
+import { fetchApi } from '../../../Utils';
 
 
 const GroupCell = ({children, caption, ava, verified, link}) => {
@@ -33,7 +32,6 @@ const GroupCell = ({children, caption, ava, verified, link}) => {
 }
 
 export const Main = props => {
-    const { userToken, getPlaceholder } = useToken();
     const [communitiesInfo, setCommunitiesInfo] = useState(null);
     const getCategoryIds = (category) => {
         return OFFICIAL_COMMUNITES[category].map((cat) => cat.community_id)
@@ -57,40 +55,26 @@ export const Main = props => {
         ))
     }
     useEffect(() => {
-        console.log(Object.keys(OFFICIAL_COMMUNITES).map((category, i) => 
-        (OFFICIAL_COMMUNITES[category].map((community) => 
-        community.community_id)
-        )).flat())
-        bridge.send("VKWebAppCallAPIMethod",
-        { 
-            method: 'groups.getById',
-            params: {
-                group_ids: Object.keys(OFFICIAL_COMMUNITES).map((category, i) => 
-                (OFFICIAL_COMMUNITES[category].map((community) => 
-                community.community_id)
-                )).flat().join(','),
-                access_token: userToken, 
-                fields: 'verified',
-                v: '5.131',
-            },
-            
-        })
+        fetchApi('groups.getById', {
+            group_ids: Object.keys(OFFICIAL_COMMUNITES).map((category, i) => 
+            (OFFICIAL_COMMUNITES[category].map((community) => 
+            community.community_id)
+            )).flat().join(','),
+            fields: 'verified',
+        }, window)
+        .then(data => data.json())
         .then((data) => {
             setCommunitiesInfo(data.response);
-            console.log(data.response)
         })
         .catch((e) => console.log(e))
         
-    }, [userToken]);
+    }, []);
     return (
         <Panel id={props.id}>
             <PanelHeader>
                 Сообщества
             </PanelHeader>
-            {!userToken && <Group>
-                {getPlaceholder('placeholder')}
-                </Group>}
-            {communitiesInfo || !userToken ? null : <Group>
+            {!communitiesInfo && <Group>
                 <PanelSpinner />
             </Group>}
             {communitiesInfo && <>

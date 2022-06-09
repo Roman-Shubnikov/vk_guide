@@ -42,6 +42,7 @@ import {
 import { LinkHandler } from './Utils';
 import { Button } from '@vkontakte/vkui';
 
+export const API_URL = 'https://xelene.ru/vk_guide/php/index.php?';
 export const APP_ID = 8154914;
 export const IMAGES_URL = process.env.PUBLIC_URL + '/img';
 export const CHANNELS_IMG_URL = process.env.PUBLIC_URL + '/img/channels_avatar';

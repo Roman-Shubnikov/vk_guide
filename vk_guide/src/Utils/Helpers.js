@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "@vkontakte/vkui";
+import { API_URL } from '../config';
 
 export const getHumanyTime = (unixtime) => {
     let date, time, year, month, day, hours, minutes, datetime;
@@ -71,6 +72,15 @@ export const recog_number = (num) => {
 };
 export const getRandomInRange = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export const fetchApi = (method, data, window, http_method='post') => {
+    return fetch(API_URL + 'method=' + method + '&' + window.location.search.replace('?', ''), 
+    {
+        method: http_method,
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+        body: JSON.stringify(data),
+    })
 }
 
 export const LinkHandler = props => {

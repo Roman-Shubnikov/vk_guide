@@ -11,11 +11,10 @@ import {
 
 import { SVGLogo } from '../../../svg';
 import { CATEGORIES } from '../../../config';
-import { useNavigation, useToken } from '../../../hooks';
+import { useNavigation } from '../../../hooks';
 
 export const Main = props => {
     const { goPanel, activeStory } = useNavigation();
-    const { userToken, getPlaceholder } = useToken();
     return (
         <Panel id={props.id}>
             <PanelHeader>
@@ -30,9 +29,6 @@ export const Main = props => {
                 </Placeholder>
                 
             </Group>
-            {!userToken && <Group>
-                {getPlaceholder('cell')}
-            </Group>}
             <Group>
                 <Div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
                     <ul style={{

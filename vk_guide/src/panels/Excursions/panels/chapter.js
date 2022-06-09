@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import bridge from '@vkontakte/vk-bridge';
 import {
     Panel, 
     PanelHeader, 
@@ -22,7 +21,7 @@ import {
 } from '@vkontakte/vkui';
 import { Icon16Verified, Icon20SmartphoneOutline } from '@vkontakte/icons';
 import { CATEGORIES, IMAGES_URL, IS_MOBILE } from '../../../config';
-import { enumerate } from '../../../Utils';
+import { enumerate, fetchApi } from '../../../Utils';
 import { useUser } from '../../../hooks';
 const Chapters = props => {
     const platform = usePlatform();
@@ -30,20 +29,13 @@ const Chapters = props => {
     const { userToken } = useUser();
     const Category = CATEGORIES.find((val, i) => val.category === props.chapter);
     useEffect(() => {
-        if(Category && userToken && 'community_id' in Category) {
-            bridge.send("VKWebAppCallAPIMethod",
-            { 
-                method: 'groups.getById',
-                params: {
-                    group_id: Category.community_id, 
-                    access_token: userToken, 
-                    fields: 'verified,members_count',
-                    v: '5.131',
-                },
-                
-            })
+        if(Category && 'community_id' in Category) {
+            fetchApi('groups.getById', {
+                group_ids: String(Category.community_id),
+                fields: 'verified,members_count',
+            }, window)
+            .then(data => data.json())
             .then((data) => {
-                console.log(data.response[0]);
                 setCommunity(data.response[0]);
             })
             .catch((e) => console.log(e))
@@ -79,7 +71,7 @@ const Chapters = props => {
                     </Card>
                 </Div>
                 }
-                {'community_id' in Category && userToken && (community ? <>
+                {'community_id' in Category && (community ? <>
                 <RichCell
                 target="_blank" rel="noopener noreferrer"
                 href={'https://vk.com/' + community.screen_name}
